@@ -36,8 +36,8 @@
 
 <h3>Place your order:</h3> </br>
 <%= form_for Order.new, url: '/snacks/place_order' do |f| %>
+  Your name: <%= f.text_field :ordered_by %>
   What do you want? <%= f.text_field :name%>
-  Ordered By: <%= f.text_field :ordered_by %>
   Quantity: <%= f.text_field :quantity %>
   Special Instructions: <%= f.text_area :special_instructions %>
   <%= f.hidden_field :snack_id, value: @snack.id %>
@@ -46,8 +46,8 @@
 
 <table>
   <th>Ordered by:</th>
-  <th>Quantity</th>
   <th>Item name</th>
+  <th>Quantity</th>
   <th>Special Instructions</th>
 <% @orders.each do |order| %>
   <tr>
