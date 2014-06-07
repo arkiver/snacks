@@ -42,7 +42,7 @@
   Special Instructions: <%= f.text_area :special_instructions %>
   <%= f.hidden_field :snack_id, value: @snack.id %>
   <%= f.submit %>
-<%end%>
+<% end %>
 
 <table>
   <th>Ordered by:</th>
@@ -50,11 +50,11 @@
   <th>Quantity</th>
   <th>Special Instructions</th>
 <% @orders.each do |order| %>
-  <tr>
-    <td> <%= order.ordered_by.capitalize %> </td>
-    <td> <%= order.name %> </td>
-    <td> <%= order.quantity %> </td>
-    <td> <%= order.special_instructions %> </td>
+    <tr>
+      <td> <%= order.ordered_by.capitalize %> </td>
+      <td> <%= order.name %> </td>
+      <td> <%= order.quantity %> </td>
+      <td> <%= order.special_instructions %> </td>
   </tr>
 <% end %>
 </table>

@@ -4,7 +4,9 @@ class SnacksController < ApplicationController
   def show
     @snack = Snack.where("created_at < ? AND created_at > ?",
                          Date.tomorrow, Date.yesterday).first
-    @orders = @snack.try(:orders)
+    @orders = []
+    @grouped_orders = []
+    @orders = @snack.orders     if @snack
     @grouped_orders = grouped_orders if !@orders.empty?
   end
 
@@ -20,9 +22,8 @@ class SnacksController < ApplicationController
   # POST /snacks
   def create
     @snack = Snack.new(snack_params)
-
     if @snack.save
-      redirect_to @snack, notice: 'Snack was successfully created.'
+      redirect_to :root
     else
       render action: 'new'
     end
@@ -40,7 +41,7 @@ class SnacksController < ApplicationController
   def place_order
     params[:order].permit!
     Order.create(params[:order])
-    redirect_to snack_path(id: params[:order][:snack_id])
+    redirect_to :root
   end
 
   # DELETE /snacks/1
