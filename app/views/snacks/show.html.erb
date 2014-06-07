@@ -2,7 +2,9 @@
   <div id="inner-div" style="padding: 20px;">
   <strong style="font-size: 2em;">Total Order: </strong><br>
   <% @grouped_orders.each do |k, v|%>
-    <b><%= "#{k.capitalize}" %> </b>  quantity <b><%= "#{v.count}"%></b>
+    <% q = 0 %>
+    <% v.map{|o| q += o.quantity.to_i}%>
+    <b><%= "#{k.capitalize}" %> </b>  quantity <b><%= "#{q}"%></b>
     <br/><b>Special Instructions for <%= k%>:</b>
       <%= v.select{|o| !o.special_instructions.blank?}.map{|vv| "#{vv.special_instructions} in 1"}.join(', ') %>
     <br/>
@@ -44,6 +46,7 @@
   <%= f.submit %>
 <% end %>
 
+Who's ordering what?
 <table>
   <th>Ordered by:</th>
   <th>Item name</th>
