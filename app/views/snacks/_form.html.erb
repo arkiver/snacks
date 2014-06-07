@@ -1,0 +1,22 @@
+<%= form_for(@snack) do |f| %>
+  <% if @snack.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@snack.errors.count, "error") %> prohibited this snack from being saved:</h2>
+
+      <ul>
+      <% @snack.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    Name: <%= f.text_area :name%>
+    <br/>
+    Provider <%= f.text_field :provider %>
+    <br/>
+    Price <%= f.text_field :price %>
+    <%= f.submit %>
+  </div>
+<% end %>

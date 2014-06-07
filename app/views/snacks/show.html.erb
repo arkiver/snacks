@@ -1,0 +1,63 @@
+<div id="snack_stats" style="border: solid 3px">
+  <div id="inner-div" style="padding: 20px;">
+  <strong style="font-size: 2em;">Total Order: </strong><br>
+  <% @grouped_orders.each do |k, v|%>
+    <b><%= "#{k.capitalize}" %> </b>  quantity <b><%= "#{v.count}"%></b>
+    <br/><b>Special Instructions for <%= k%>:</b>
+      <%= v.select{|o| !o.special_instructions.blank?}.map{|vv| "#{vv.special_instructions} in 1"}.join(', ') %>
+    <br/>
+    <%= "-" * 150%>
+    <br/>
+  <% end %>
+</div>
+</div>
+<%if @snack%>
+<dl>
+  <dt>
+  Today's snack is:
+  </dt>
+  <dd>
+  <%= @snack.name %>
+  </dd>
+  <dt>
+  Ordering from:
+  <dt/>
+  <dd>
+  <%= @snack.provider %>
+  </dd>
+
+  <dt>
+    Rate:
+  <dt/>
+  <dd>
+  <%= @snack.price %>
+  </dd>
+</dl>
+
+<h3>Place your order:</h3> </br>
+<%= form_for Order.new, url: '/snacks/place_order' do |f| %>
+  What do you want? <%= f.text_field :name%>
+  Ordered By: <%= f.text_field :ordered_by %>
+  Quantity: <%= f.text_field :quantity %>
+  Special Instructions: <%= f.text_area :special_instructions %>
+  <%= f.hidden_field :snack_id, value: @snack.id %>
+  <%= f.submit %>
+<%end%>
+
+<table>
+  <th>Ordered by:</th>
+  <th>Quantity</th>
+  <th>Item name</th>
+  <th>Special Instructions</th>
+<% @orders.each do |order| %>
+  <tr>
+    <td> <%= order.ordered_by.capitalize %> </td>
+    <td> <%= order.name %> </td>
+    <td> <%= order.quantity %> </td>
+    <td> <%= order.special_instructions %> </td>
+  </tr>
+<% end %>
+</table>
+<%else%>
+  <h1>No munchies for you today!!</h1>
+<%end%>
