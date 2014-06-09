@@ -50,7 +50,7 @@
   Quantity: <%= f.text_field :quantity %>
   Special Instructions: <%= f.text_area :special_instructions %>
   <%= f.hidden_field :snack_id, value: @snack.id %>
-  <%= f.submit :class 'button' %>
+  <%= f.submit 'Place order', class: 'button' %>
 <% end %>
 
 Who's ordering what?
