@@ -4,7 +4,7 @@
   <% @grouped_orders.each do |k, v|%>
     <% q = 0 %>
     <% v.map{|o| q += o.quantity.to_i}%>
-    <b><%= "#{k.capitalize}" %> </b>  quantity <b><%= "#{q}"%></b>
+    <b><%= "#{k}" %> </b>  quantity <b><%= "#{q}"%></b>
     <br/><b>Special Instructions for <%= k%>:</b>
       <%= v.select{|o| !o.special_instructions.blank?}.map{|vv| "#{vv.special_instructions} in 1"}.join(', ') %>
     <br/>
