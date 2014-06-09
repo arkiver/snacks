@@ -1,16 +1,23 @@
-<div id="snack_stats" style="border: solid 3px">
-  <div id="inner-div" style="padding: 20px;">
-  <strong style="font-size: 2em;">Total Order: </strong><br>
-  <% @grouped_orders.each do |k, v|%>
-    <% q = 0 %>
-    <% v.map{|o| q += o.quantity.to_i}%>
-    <b><%= "#{k}" %> </b>  quantity <b><%= "#{q}"%></b>
-    <br/><b>Special Instructions for <%= k%>:</b>
-      <%= v.select{|o| !o.special_instructions.blank?}.map{|vv| "#{vv.special_instructions} in 1"}.join(', ') %>
-    <br/>
-    <%= "-" * 150%>
-    <br/>
-  <% end %>
+<div id="snack_stats">
+  <div id="inner-div">
+  <h4>Total Order: </h4>
+  <table>
+   <th>
+     <td>Item</td>
+     <td>quantity</td>
+     <td>Special Instructions</td>
+   </th>
+   <% @grouped_orders.each do |k, v|%>
+   <tr>
+     <% q = 0 %>
+     <% v.map{|o| q += o.quantity.to_i}%>
+     <td><%= "#{k}" %></td>
+     <td><%= "#{q}"%></td>
+     <td>For <%= k%>: </td>
+     <%= v.select{|o| !o.special_instructions.blank?}.map{|vv| "#{vv.special_instructions} in 1"}.join(', ') %>
+   </tr>
+   <% end %>
+  </table>
 </div>
 </div>
 <%if @snack%>
@@ -43,21 +50,23 @@
   Quantity: <%= f.text_field :quantity %>
   Special Instructions: <%= f.text_area :special_instructions %>
   <%= f.hidden_field :snack_id, value: @snack.id %>
-  <%= f.submit %>
+  <%= f.submit :class 'button' %>
 <% end %>
 
 Who's ordering what?
-<table>
-  <th>Ordered by:</th>
-  <th>Item name</th>
-  <th>Quantity</th>
-  <th>Special Instructions</th>
-<% @orders.each do |order| %>
-    <tr>
-      <td> <%= order.ordered_by.capitalize %> </td>
-      <td> <%= order.name %> </td>
-      <td> <%= order.quantity %> </td>
-      <td> <%= order.special_instructions %> </td>
+<table id="order-summary">
+  <th>
+    <td>Ordered by:</td>
+    <td>Item name</td>
+    <td>Quantity</td>
+    <td>Special Instructions</td>
+  </th>
+  <% @orders.each do |order| %>
+  <tr>
+    <td><%= order.ordered_by.capitalize %></td>
+    <td><%= order.name %></td>
+    <td><%= order.quantity %></td>
+    <td> <%= order.special_instructions %></td>
   </tr>
 <% end %>
 </table>
