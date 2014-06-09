@@ -14,7 +14,7 @@
      <td><%= "#{k}" %></td>
      <td><%= "#{q}"%></td>
      <td>For <%= k%>: </td>
-     <%= v.select{|o| !o.special_instructions.blank?}.map{|vv| "#{vv.special_instructions} in 1"}.join(', ') %>
+     <td> <%= v.select{|o| !o.special_instructions.blank?}.map{|vv| "#{vv.special_instructions} in 1"}.join(', ') %> </td>
    </tr>
    <% end %>
   </table>
@@ -68,7 +68,7 @@ Who's ordering what?
     <td><%= order.quantity %></td>
     <td> <%= order.special_instructions %></td>
   </tr>
-<% end %>
+  <% end %>
 </table>
 <%else%>
   <h1>No munchies for you today!</h1>
