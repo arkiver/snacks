@@ -7,13 +7,13 @@
      <td>quantity</td>
      <td>Special Instructions</td>
    </th>
-   <% @grouped_orders.each do |k, v|%>
+   <% @grouped_orders.each do |k, v| %>
    <tr>
      <% q = 0 %>
-     <% v.map{|o| q += o.quantity.to_i}%>
+     <% v.map{|o| q += o.quantity.to_i} %>
      <td><%= "#{k}" %></td>
      <td><%= "#{q}"%></td>
-     <td>For <%= k%>: </td>
+     <td>For <%= k %>: </td>
      <td> <%= v.select{|o| !o.special_instructions.blank?}.map{|vv| "#{vv.special_instructions} in 1"}.join(', ') %> </td>
    </tr>
    <% end %>
@@ -55,21 +55,25 @@
 
 Who's ordering what?
 <table id="order-summary">
-  <th>
-    <td>Ordered by:</td>
-    <td>Item name</td>
-    <td>Quantity</td>
-    <td>Special Instructions</td>
-  </th>
-  <% @orders.each do |order| %>
-  <tr>
-    <td><%= order.ordered_by.capitalize %></td>
-    <td><%= order.name %></td>
-    <td><%= order.quantity %></td>
-    <td> <%= order.special_instructions %></td>
-  </tr>
+  <thead>
+    <tr>
+      <td>Ordered by:</td>
+      <td>Item name</td>
+      <td>Quantity</td>
+      <td>Special Instructions</td>
+    </tr>
+  </thead>
+  <tbody>
+    <% @orders.each do |order| %>
+    <tr>
+      <td><%= order.ordered_by.capitalize %></td>
+      <td><%= order.name %></td>
+      <td><%= order.quantity %></td>
+      <td> <%= order.special_instructions %></td>
+    </tr>
   <% end %>
+  </tbody>
 </table>
 <%else%>
-  <h1>No munchies for you today!</h1>
+<h1>No munchies for you today!</h1>
 <%end%>
