@@ -30,6 +30,11 @@ h3 {
   input {
     margin-top: 0.4rem;
     border-radius: 4px;
+    height: 2rem;
+  }
+  textarea {
+    margin-top: 0.4rem;
+    border-radius: 4px;
   }
 }
 
@@ -39,6 +44,10 @@ table thead tr th, table thead tr td {
   color: #222;
   font-style: italic;
   font-family: georgia, serif;
+}
+td, table tr td {
+  color: #555;
+  font-weight: 300;
 }
 
 dl dt {
@@ -63,4 +72,10 @@ div#heading {
   font-size: 1.8rem;
   letter-spacing: 0.1rem;
   color: #999;
+}
+#footer {
+  margin: 20px;
+  text-align: center;
+  border-top: 1px solid #ccc;
+  padding: 10px 0;
 }
