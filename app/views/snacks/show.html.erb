@@ -70,29 +70,6 @@
 
 
 <div id="snack_stats" class="row">
-  <div id="inner-div" class="large-6 small-12 columns">
-    <h3>Total Order: </h3>
-    <table>
-      <thead>
-        <tr>
-          <td>Name</td>
-          <td>Item</td>
-          <td>Quantity</td>
-          <td>Special Instructions</td>
-        </tr>
-      </thead>
-      <% @grouped_orders.each do |k, v| %>
-      <tr>
-        <% q = 0 %>
-        <% v.map{|o| q += o.quantity.to_i} %>
-        <td><%= "#{k}" %></td>
-        <td><%= "#{q}"%></td>
-        <td>For <%= k %>: </td>
-        <td> <%= v.select{|o| !o.special_instructions.blank?}.map{|vv| "#{vv.special_instructions} in 1"}.join(', ') %> </td>
-      </tr>
-      <% end %>
-    </table>
-  </div>
   <div class="large-6 small-12 columns">
     <%if @snack%>
     <h3>Who's ordering what?</h3>
