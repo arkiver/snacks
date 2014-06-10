@@ -1,5 +1,53 @@
+<div class="row">
+    <%if @snack%>
+    <div class="large-6 small-12 columns">
+    <h4>Today's snack</h4>
+    <dl>
+      <dt>
+        Snack
+      </dt>
+      <dd>
+        <%= @snack.name %>
+      </dd>
+      <dt>
+        Ordering from:
+      <dt/>
+        <dd>
+          <%= @snack.provider %>
+        </dd>
+
+      <dt>
+        Rate:
+      <dt/>
+        <dd>
+          <%= @snack.price %>
+        </dd>
+    </dl>
+
+    </div>
+    <div class="large-6 small-12 columns">
+      <h3>Place your order:</h3>
+      <div id="order-form">
+        <%= form_for Order.new, url: '/snacks/place_order' do |f| %>
+        Your name: <%= f.text_field :ordered_by %>
+        What do you want? <%= f.text_field :name%>
+        Quantity: <%= f.text_field :quantity %>
+        Special Instructions: <%= f.text_area :special_instructions %>
+        <%= f.hidden_field :snack_id, value: @snack.id %>
+        <%= f.submit 'Place order', class: 'button' %>
+        <% end %>
+      </div>
+    </div>
+    <%else%>
+    <div class="columns end">
+    <h1>No munchies for you today!</h1>
+    </div>
+    <%end%>
+</div>
+
+
 <div id="snack_stats" class="row">
-  <div id="inner-div" class="columns end">
+  <div id="inner-div" class="large-6 small-12 columns">
     <h4>Total Order: </h4>
     <table>
       <thead>
@@ -22,45 +70,9 @@
       <% end %>
     </table>
   </div>
-</div>
-<div class="row">
-  <div class="columns end">
+  <div class="large-6 small-12 columns">
     <%if @snack%>
-    <dl>
-      <dt>
-        Today's snack is:
-      </dt>
-      <dd>
-        <%= @snack.name %>
-      </dd>
-      <dt>
-        Ordering from:
-      <dt/>
-        <dd>
-          <%= @snack.provider %>
-        </dd>
-
-      <dt>
-        Rate:
-      <dt/>
-        <dd>
-          <%= @snack.price %>
-        </dd>
-    </dl>
-
-    <h3>Place your order:</h3>
-    <div id="order-form">
-      <%= form_for Order.new, url: '/snacks/place_order' do |f| %>
-      Your name: <%= f.text_field :ordered_by %>
-      What do you want? <%= f.text_field :name%>
-      Quantity: <%= f.text_field :quantity %>
-      Special Instructions: <%= f.text_area :special_instructions %>
-      <%= f.hidden_field :snack_id, value: @snack.id %>
-      <%= f.submit 'Place order', class: 'button' %>
-      <% end %>
-    </div>
-
-    Who's ordering what?
+    <h4>Who's ordering what?</h4>
     <table id="order-summary">
       <thead>
         <tr>
@@ -81,8 +93,6 @@
         <% end %>
       </tbody>
     </table>
-    <%else%>
-    <h1>No munchies for you today!</h1>
-    <%end%>
+    <% end %>
   </div>
 </div>
