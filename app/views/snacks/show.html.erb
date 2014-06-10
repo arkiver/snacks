@@ -1,5 +1,5 @@
-<div id="snack_stats">
-  <div id="inner-div">
+<div id="snack_stats" class="row">
+  <div id="inner-div" class="columns end">
     <h4>Total Order: </h4>
     <table>
       <thead>
@@ -23,64 +23,66 @@
     </table>
   </div>
 </div>
-<div>
-  <%if @snack%>
-  <dl>
-    <dt>
-      Today's snack is:
-    </dt>
-    <dd>
-      <%= @snack.name %>
-    </dd>
-    <dt>
-      Ordering from:
-    <dt/>
+<div class="row">
+  <div class="columns end">
+    <%if @snack%>
+    <dl>
+      <dt>
+        Today's snack is:
+      </dt>
       <dd>
-        <%= @snack.provider %>
+        <%= @snack.name %>
       </dd>
+      <dt>
+        Ordering from:
+      <dt/>
+        <dd>
+          <%= @snack.provider %>
+        </dd>
 
-    <dt>
-      Rate:
-    <dt/>
-      <dd>
-        <%= @snack.price %>
-      </dd>
-  </dl>
+      <dt>
+        Rate:
+      <dt/>
+        <dd>
+          <%= @snack.price %>
+        </dd>
+    </dl>
 
-  <h3>Place your order:</h3>
-  <div id="order-form">
-    <%= form_for Order.new, url: '/snacks/place_order' do |f| %>
-    Your name: <%= f.text_field :ordered_by %>
-    What do you want? <%= f.text_field :name%>
-    Quantity: <%= f.text_field :quantity %>
-    Special Instructions: <%= f.text_area :special_instructions %>
-    <%= f.hidden_field :snack_id, value: @snack.id %>
-    <%= f.submit 'Place order', class: 'button' %>
-    <% end %>
-  </div>
-
-  Who's ordering what?
-  <table id="order-summary">
-    <thead>
-      <tr>
-        <td>Ordered by:</td>
-        <td>Item name</td>
-        <td>Quantity</td>
-        <td>Special Instructions</td>
-      </tr>
-    </thead>
-    <tbody>
-      <% @orders.each do |order| %>
-      <tr>
-        <td><%= order.ordered_by.capitalize %></td>
-        <td><%= order.name %></td>
-        <td><%= order.quantity %></td>
-        <td> <%= order.special_instructions %></td>
-      </tr>
+    <h3>Place your order:</h3>
+    <div id="order-form">
+      <%= form_for Order.new, url: '/snacks/place_order' do |f| %>
+      Your name: <%= f.text_field :ordered_by %>
+      What do you want? <%= f.text_field :name%>
+      Quantity: <%= f.text_field :quantity %>
+      Special Instructions: <%= f.text_area :special_instructions %>
+      <%= f.hidden_field :snack_id, value: @snack.id %>
+      <%= f.submit 'Place order', class: 'button' %>
       <% end %>
-    </tbody>
-  </table>
-  <%else%>
-  <h1>No munchies for you today!</h1>
-  <%end%>
+    </div>
+
+    Who's ordering what?
+    <table id="order-summary">
+      <thead>
+        <tr>
+          <td>Ordered by:</td>
+          <td>Item name</td>
+          <td>Quantity</td>
+          <td>Special Instructions</td>
+        </tr>
+      </thead>
+      <tbody>
+        <% @orders.each do |order| %>
+        <tr>
+          <td><%= order.ordered_by.capitalize %></td>
+          <td><%= order.name %></td>
+          <td><%= order.quantity %></td>
+          <td> <%= order.special_instructions %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <%else%>
+    <h1>No munchies for you today!</h1>
+    <%end%>
+  </div>
 </div>
