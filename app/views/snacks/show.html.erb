@@ -1,3 +1,4 @@
+<div id="heading">Snack Ordering System at Idyllic Software</div> 
 <div class="row">
     <%if @snack%>
     <div class="large-6 small-12 columns">
@@ -10,14 +11,14 @@
         <%= @snack.name %>
       </dd>
       <dt>
-        Ordering from:
+        Ordering from
       <dt/>
         <dd>
           <%= @snack.provider %>
         </dd>
 
       <dt>
-        Rate:
+        Rate
       <dt/>
         <dd>
           <%= @snack.price %>
@@ -26,13 +27,13 @@
 
     </div>
     <div class="large-6 small-12 columns">
-      <h3>Place your order:</h3>
+      <h3>Place your order</h3>
       <div id="order-form">
         <%= form_for Order.new, url: '/snacks/place_order' do |f| %>
-        Your name: <%= f.text_field :ordered_by %>
-        What do you want? <%= f.text_field :name%>
-        Quantity: <%= f.text_field :quantity %>
-        Special Instructions: <%= f.text_area :special_instructions %>
+        <span>Your name ?</span><%= f.text_field :ordered_by %>
+        <span>What do you want ?</span><%= f.text_field :name%>
+        <span>How many ?</span><%= f.text_field :quantity %>
+        <span>Special instructions ?</span><%= f.text_area :special_instructions %>
         <%= f.hidden_field :snack_id, value: @snack.id %>
         <%= f.submit 'Place order', class: 'button' %>
         <% end %>
@@ -48,14 +49,14 @@
 
 <div id="snack_stats" class="row">
   <div id="inner-div" class="large-6 small-12 columns">
-    <h3>Total Order: </h3>
+    <h3>Total Order</h3>
     <table>
       <thead>
         <tr>
-          <td>Name</td>
+          <td>Food Name</td>
           <td>Item</td>
-          <td>Quantity</td>
-          <td>Special Instructions</td>
+          <td>No.</td>
+          <td>Instructions</td>
         </tr>
       </thead>
       <% @grouped_orders.each do |k, v| %>
@@ -72,14 +73,14 @@
   </div>
   <div class="large-6 small-12 columns">
     <%if @snack%>
-    <h3>Who's ordering what?</h3>
+    <h3>Who's ordering what ?</h3>
     <table id="order-summary">
       <thead>
         <tr>
-          <td>Ordered by:</td>
-          <td>Item name</td>
-          <td>Quantity</td>
-          <td>Special Instructions</td>
+          <td>Ordered By</td>
+          <td>Food Name</td>
+          <td>No.</td>
+          <td>Instructions</td>
         </tr>
       </thead>
       <tbody>
