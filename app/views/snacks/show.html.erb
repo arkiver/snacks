@@ -22,11 +22,12 @@
   </div>
 </div>
 <div class="row">
-  <div class="columns end">
     <%if @snack%>
+    <div class="large-6 small-12 columns">
+    <h3>Today's snack</h3>
     <dl>
       <dt>
-        Today's snack is:
+        Snack
       </dt>
       <dd>
         <%= @snack.name %>
@@ -46,19 +47,55 @@
         </dd>
     </dl>
 
-    <h3>Place your order:</h3>
-    <div id="order-form">
-      <%= form_for Order.new, url: '/snacks/place_order' do |f| %>
-      Your name: <%= f.text_field :ordered_by %>
-      What do you want? <%= f.text_field :name%>
-      Quantity: <%= f.text_field :quantity %>
-      Special Instructions: <%= f.text_area :special_instructions %>
-      <%= f.hidden_field :snack_id, value: @snack.id %>
-      <%= f.submit 'Place order', class: 'button' %>
-      <% end %>
     </div>
+    <div class="large-6 small-12 columns">
+      <h3>Place your order:</h3>
+      <div id="order-form">
+        <%= form_for Order.new, url: '/snacks/place_order' do |f| %>
+        Your name: <%= f.text_field :ordered_by %>
+        What do you want? <%= f.text_field :name%>
+        Quantity: <%= f.text_field :quantity %>
+        Special Instructions: <%= f.text_area :special_instructions %>
+        <%= f.hidden_field :snack_id, value: @snack.id %>
+        <%= f.submit 'Place order', class: 'button' %>
+        <% end %>
+      </div>
+    </div>
+    <%else%>
+    <div class="columns end">
+    <h1>No munchies for you today!</h1>
+    </div>
+    <%end%>
+</div>
 
-    Who's ordering what?
+
+<div id="snack_stats" class="row">
+  <div id="inner-div" class="large-6 small-12 columns">
+    <h3>Total Order: </h3>
+    <table>
+      <thead>
+        <tr>
+          <td>Name</td>
+          <td>Item</td>
+          <td>Quantity</td>
+          <td>Special Instructions</td>
+        </tr>
+      </thead>
+      <% @grouped_orders.each do |k, v| %>
+      <tr>
+        <% q = 0 %>
+        <% v.map{|o| q += o.quantity.to_i} %>
+        <td><%= "#{k}" %></td>
+        <td><%= "#{q}"%></td>
+        <td>For <%= k %>: </td>
+        <td> <%= v.select{|o| !o.special_instructions.blank?}.map{|vv| "#{vv.special_instructions} in 1"}.join(', ') %> </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+  <div class="large-6 small-12 columns">
+    <%if @snack%>
+    <h3>Who's ordering what?</h3>
     <table id="order-summary">
       <thead>
         <tr>
@@ -79,8 +116,6 @@
         <% end %>
       </tbody>
     </table>
-    <%else%>
-    <h1>No munchies for you today!</h1>
-    <%end%>
+    <% end %>
   </div>
 </div>
