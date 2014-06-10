@@ -5,7 +5,6 @@
       <thead>
         <tr>
           <td>Name</td>
-          <td>Item</td>
           <td>Quantity</td>
           <td>Special Instructions</td>
         </tr>
@@ -16,7 +15,6 @@
         <% v.map{|o| q += o.quantity.to_i} %>
         <td><%= "#{k}" %></td>
         <td><%= "#{q}"%></td>
-        <td>For <%= k %>: </td>
         <td> <%= v.select{|o| !o.special_instructions.blank?}.map{|vv| "#{vv.special_instructions} in 1"}.join(', ') %> </td>
       </tr>
       <% end %>
