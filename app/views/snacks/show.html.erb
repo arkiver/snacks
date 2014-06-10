@@ -1,7 +1,7 @@
-<div id="heading">Snack Ordering System at Idyllic Software</div> 
+<div id="heading">Snack Ordering System at Idyllic Software</div>
 <div class="row">
-    <%if @snack%>
-    <div class="large-6 small-12 columns">
+  <%if @snack%>
+  <div class="large-6 small-12 columns">
     <h3>Today's snack</h3>
     <dl>
       <dt>
@@ -24,29 +24,26 @@
           <%= @snack.price %>
         </dd>
     </dl>
-
+  </div>
+  <div class="large-6 small-12 columns">
+    <h3>Place your order</h3>
+    <div id="order-form">
+      <%= form_for Order.new, url: '/snacks/place_order' do |f| %>
+      <span>Your name ?</span><%= f.text_field :ordered_by %>
+      <span>What do you want ?</span><%= f.text_field :name%>
+      <span>How many ?</span><%= f.text_field :quantity %>
+      <span>Special instructions ?</span><%= f.text_area :special_instructions %>
+      <%= f.hidden_field :snack_id, value: @snack.id %>
+      <%= f.submit 'Place order', class: 'button' %>
+      <% end %>
     </div>
-    <div class="large-6 small-12 columns">
-      <h3>Place your order</h3>
-      <div id="order-form">
-        <%= form_for Order.new, url: '/snacks/place_order' do |f| %>
-        <span>Your name ?</span><%= f.text_field :ordered_by %>
-        <span>What do you want ?</span><%= f.text_field :name%>
-        <span>How many ?</span><%= f.text_field :quantity %>
-        <span>Special instructions ?</span><%= f.text_area :special_instructions %>
-        <%= f.hidden_field :snack_id, value: @snack.id %>
-        <%= f.submit 'Place order', class: 'button' %>
-        <% end %>
-      </div>
-    </div>
-    <%else%>
-    <div class="columns end">
+  </div>
+  <%else%>
+  <div class="columns end">
     <h1>No munchies for you today!</h1>
-    </div>
-    <%end%>
+  </div>
+  <%end%>
 </div>
-
-
 <div id="snack_stats" class="row">
   <div id="inner-div" class="large-6 small-12 columns">
     <h3>Total Order</h3>
@@ -97,3 +94,4 @@
     <% end %>
   </div>
 </div>
+
