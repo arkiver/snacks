@@ -1,6 +1,6 @@
+<%if @snack%>
 <div id="heading">Snack Ordering System at Idyllic Software</div>
 <div class="row">
-  <%if @snack%>
   <div class="large-6 small-12 columns">
     <h3>Today's snack</h3>
     <dl>
@@ -12,37 +12,32 @@
       </dd>
       <dt>
         Ordering from
-      <dt/>
+        <dt/>
         <dd>
           <%= @snack.provider %>
         </dd>
 
-      <dt>
-        Rate
-      <dt/>
-        <dd>
-          <%= @snack.price %>
-        </dd>
+        <dt>
+          Rate
+          <dt/>
+          <dd>
+            <%= @snack.price %>
+          </dd>
     </dl>
   </div>
   <div class="large-6 small-12 columns">
     <h3>Place your order</h3>
     <div id="order-form">
       <%= form_for Order.new, url: '/snacks/place_order' do |f| %>
-      <span>Your name ?</span><%= f.text_field :ordered_by %>
-      <span>What do you want ?</span><%= f.text_field :name%>
-      <span>How many ?</span><%= f.text_field :quantity %>
-      <span>Special instructions ?</span><%= f.text_area :special_instructions %>
-      <%= f.hidden_field :snack_id, value: @snack.id %>
-      <%= f.submit 'Place order', class: 'button' %>
+        <span>Your name ?</span><%= f.text_field :ordered_by %>
+        <span>What do you want ?</span><%= f.text_field :name%>
+        <span>How many ?</span><%= f.text_field :quantity %>
+        <span>Special instructions ?</span><%= f.text_area :special_instructions %>
+        <%= f.hidden_field :snack_id, value: @snack.id %>
+        <%= f.submit 'Place order', class: 'button' %>
       <% end %>
     </div>
   </div>
-  <%else%>
-  <div class="columns end">
-    <h1>No munchies for you today!</h1>
-  </div>
-  <%end%>
 </div>
 <div id="snack_stats" class="row">
   <div id="inner-div" class="large-6 small-12 columns">
@@ -56,41 +51,49 @@
         </tr>
       </thead>
       <% @grouped_orders.each do |k, v| %>
-      <tr>
-        <% q = 0 %>
-        <% v.map{|o| q += o.quantity.to_i} %>
-        <td><%= "#{k}" %></td>
-        <td><%= "#{q}"%></td>
-        <td> <%= v.select{|o| !o.special_instructions.blank?}.map{|vv| "#{vv.special_instructions} in 1"}.join(', ') %> </td>
-      </tr>
+        <tr>
+          <% q = 0 %>
+          <% v.map{|o| q += o.quantity.to_i} %>
+          <td><%= "#{k}" %></td>
+            <td><%= "#{q}"%></td>
+              <td> <%= v.select{|o| !o.special_instructions.blank?}.map{|vv| "#{vv.special_instructions} in 1"}.join(', ') %> </td>
+          </tr>
       <% end %>
     </table>
   </div>
   <div class="large-6 small-12 columns">
     <%if @snack%>
-    <h3>Who's ordering what ?</h3>
-    <table id="order-summary">
-      <thead>
-        <tr>
-          <td>Ordered By</td>
-          <td>Food Name</td>
-          <td>No.</td>
-          <td>Instructions</td>
-        </tr>
-      </thead>
-      <tbody>
-        <% @orders.each do |order| %>
-        <tr>
-          <td><%= order.ordered_by.capitalize %></td>
-          <td><%= order.name %></td>
-          <td><%= order.quantity %></td>
-          <td> <%= order.special_instructions %></td>
-        </tr>
-        <% end %>
-      </tbody>
-    </table>
+      <h3>Who's ordering what ?</h3>
+      <table id="order-summary">
+        <thead>
+          <tr>
+            <td>Ordered By</td>
+            <td>Food Name</td>
+            <td>No.</td>
+            <td>Instructions</td>
+          </tr>
+        </thead>
+        <tbody>
+          <% @orders.each do |order| %>
+            <tr>
+              <td><%= order.ordered_by.capitalize %></td>
+              <td><%= order.name %></td>
+              <td><%= order.quantity %></td>
+              <td> <%= order.special_instructions %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
     <% end %>
   </div>
 </div>
 <div id="footer">&copy; 2014 Idyllic Employees</div>
 
+<% else %>
+<div id="heading">Snack Ordering System at Idyllic Software</div>
+<div class="columns end">
+  <h1>No munchies for you today!</h1>
+</div>
+</div>
+<div id="footer">&copy; 2014 Idyllic Employees</div>
+<% end %>
