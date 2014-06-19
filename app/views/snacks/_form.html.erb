@@ -11,8 +11,11 @@
     </div>
   <% end %>
 
-  <div class="actions">
-    Name: <%= f.text_area :name%>
+  <div>
+    <span style="color:red">
+      Enter a Comma Separated Value for names of snacks
+    </span><br/>
+    Name: <%= f.text_area :name, placeholder: 'ENTER CSV value'%>
     <br/>
     Provider <%= f.text_field :provider %>
     <br/>

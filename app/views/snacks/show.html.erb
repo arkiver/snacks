@@ -12,7 +12,11 @@
         Snack
       </dt>
       <dd>
-        <%= @snack.name %>
+        <% @snack.name.split(',').each_with_index do |s, i| %>
+          <p>
+          <%= i+1 %>.<%= s%>
+          </p>
+        <%end%>
       </dd>
       <dt>
         Ordering from
@@ -34,7 +38,13 @@
     <div id="order-form">
       <%= form_for Order.new, url: '/snacks/place_order' do |f| %>
         <span>Your name ?</span><%= f.text_field :ordered_by %>
-        <span>What do you want ?</span><%= f.text_field :name%>
+        <span>What do you want ?</span>
+        <% @snack.name.split(',').each do |s| %>
+          <p>
+          <%= f.radio_button :name, s %>
+          <%= f.label s %>
+          </p>
+        <% end %>
         <span>How many ?</span><%= f.text_field :quantity %>
         <span>Special instructions ?</span><%= f.text_area :special_instructions %>
         <%= f.hidden_field :snack_id, value: @snack.id %>
