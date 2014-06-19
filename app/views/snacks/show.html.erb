@@ -45,6 +45,8 @@
           <%= f.label s %>
           </p>
         <% end %>
+        Or Enter custom snack name not listed above:
+        <%= text_field_tag :custom_snack_name, nil,  placeholder: 'Enter custom snack name not listed above'%>
         <span>How many ?</span><%= f.text_field :quantity %>
         <span>Special instructions ?</span><%= f.text_area :special_instructions %>
         <%= f.hidden_field :snack_id, value: @snack.id %>

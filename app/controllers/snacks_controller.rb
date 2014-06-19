@@ -40,6 +40,7 @@ class SnacksController < ApplicationController
 
   def place_order
     params[:order].permit!
+    params[:order][:name] = params[:custom_snack_name] if !params[:custom_snack_name].blank?
     Order.create(params[:order])
     redirect_to :root
   end
