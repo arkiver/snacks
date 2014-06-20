@@ -12,11 +12,13 @@
         Snack
       </dt>
       <dd>
-        <% @snack.name.split(',').each_with_index do |s, i| %>
-          <p>
-          <%= i+1 %>.<%= s%>
-          </p>
+      <ol>
+        <% @snack.name.split(',').each do |s| %>
+        <li>
+          <%= s%>
+</li>
         <%end%>
+        </ol> 
       </dd>
       <dt>
         Ordering from
@@ -37,17 +39,17 @@
     <h3>Place your order</h3>
     <div id="order-form">
       <%= form_for Order.new, url: '/snacks/place_order' do |f| %>
-        <span>Your name ?</span><%= f.text_field :ordered_by %>
+        <span>Your name ? *</span><%= f.text_field :ordered_by, required: true%>
         <span>What do you want ?</span>
-        <% @snack.name.split(',').each do |s| %>
-          <p>
+        <% @snack.name.split(',').collect(&:strip).each do |s| %>
+          <div>
           <%= f.radio_button :name, s %>
-          <%= f.label s %>
-          </p>
+          <%= f.label s, for: "order_name_#{s}" %>
+          </div>
         <% end %>
-        Or Enter custom snack name not listed above:
+        <span>Or Enter custom snack name not listed above:</span>
         <%= text_field_tag :custom_snack_name, nil,  placeholder: 'Enter custom snack name not listed above'%>
-        <span>How many ?</span><%= f.text_field :quantity %>
+        <span>How many ? *</span><%= f.text_field :quantity, type: 'number', required: true %>
         <span>Special instructions ?</span><%= f.text_area :special_instructions %>
         <%= f.hidden_field :snack_id, value: @snack.id %>
         <%= f.submit 'Place order', class: 'button' %>
