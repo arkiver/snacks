@@ -128,8 +128,9 @@
 <% end %>
 
 <script type='text/javascript'>//<![CDATA[
-$(window).load(function(){
-$('label').click(function(){
+
+$(window).ready(function(){
+$('.toggle label').click(function(){
     $(this).children('span').addClass('input-checked');
     $(this).parent('.toggle').siblings('.toggle').children('label').children('span').removeClass('input-checked');
 });
