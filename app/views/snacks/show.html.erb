@@ -1,7 +1,7 @@
 <%if @snack%>
 <div class="row">
   <div class="twelve columns text-center"><br />
-    <%= image_tag 'sos.png' %>
+    <%= image_tag 'sos.png', style: "height:70px" %>
   </div>
 </div>
 <div class="row">
@@ -40,11 +40,11 @@
     <div id="order-form">
       <%= form_for Order.new, url: '/snacks/place_order' do |f| %>
       <div>
-        <span>Your name ? *</span>
+        <h5>Your name ? *</h5>
         <%= f.text_field :ordered_by, required: true%>
       </div>
       <div>
-        <span>What do you want ?</span>
+        <h5>What do you want ?</h5>
         <% @snack.name.split(',').collect(&:strip).each do |s| %>
           <div>
           <%= f.radio_button :name, s %>
@@ -55,12 +55,12 @@
         <%= text_field_tag :custom_snack_name, nil,  placeholder: 'Enter custom snack name not listed above'%>
       </div>
       <div>
-        <span>How many ?</span>
+        <h5>How many ?</h5>
         <div class="toggle"><label><%= f.radio_button :quantity, "1" %><span>1</span></label></div>
         <div class="toggle"><label><%= f.radio_button :quantity, "2" %><span>2</span></label></div>
       </div>
-      <div>
-        <span>Special instructions ?</span><%= f.text_area :special_instructions %>
+      <div class="clearfix">
+        <h5>Special instructions ?</h5><%= f.text_area :special_instructions %>
         <%= f.hidden_field :snack_id, value: @snack.id %>
         <%= f.submit 'Place order', class: 'button' %>
       </div>
@@ -71,7 +71,7 @@
 <div id="snack_stats" class="row">
   <div id="inner-div" class="large-6 small-12 columns">
     <h3>Total Order</h3>
-    <table>
+    <table style="width:100%">
       <thead>
         <tr>
           <td>Food Name</td>
@@ -93,7 +93,7 @@
   <div class="large-6 small-12 columns">
     <%if @snack%>
     <h3>Who's ordering what ?</h3>
-    <table id="order-summary">
+    <table id="order-summary" style="width:100%">
       <thead>
         <tr>
           <td>Ordered By</td>
@@ -129,8 +129,9 @@
 
 <script type='text/javascript'>//<![CDATA[
 
-$(window).ready(function(){
+$(document).ready(function(){
 $('.toggle label').click(function(){
+console.log('hello there');
     $(this).children('span').addClass('input-checked');
     $(this).parent('.toggle').siblings('.toggle').children('label').children('span').removeClass('input-checked');
 });

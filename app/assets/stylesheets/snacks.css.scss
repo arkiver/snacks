@@ -2,6 +2,14 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.clearfix:after {
+  content: '.';
+  display: block;
+  height: 0;
+  visibility: hidden;
+  clear: both;
+  float: none;
+}
 #snack_stats {
   margin-bottom: 30px;
 }
@@ -22,7 +30,7 @@ h3 {
   margin: 20px 0;
 }
 #order-form  {
-  span {
+  h5 {
     font-family: georgia, serif;
     font-style: italic;
     font-size: 1rem;
@@ -80,17 +88,18 @@ div#heading {
 }
 
 .toggle {
-    margin:4px;
-    background-color:#EFEFEF;
+    margin-right: 10px;
+    background-color:#FFF;
     border-radius:4px;
-    border:1px solid #D0D0D0;
-    overflow:auto;
-    float:left;
+    border:1px solid #FF0000;
+    //overflow:auto;
+    display: inline-block;
 }
 
 .toggle label {
-    float:left;
-    width:2.0em;
+  position: relative;
+  float:left;
+  width:2.0em;
 }
 
 .toggle label span {
@@ -102,10 +111,14 @@ div#heading {
 
 .toggle label input {
     position:absolute;
-    top:-20px;
+    width: 28px;
+    height: 30px;
+    opacity: 0;
+    cursor: pointer;
+    top: 0;
 }
 
 .toggle .input-checked /*, .bounds input:checked + span works for firefox and ie9 but breaks js for ie8(ONLY) */ {
-    background-color:#404040;
-    color:#F7F7F7;
+    background-color:#FF0000;
+    color:#FFFFFF;
 }
