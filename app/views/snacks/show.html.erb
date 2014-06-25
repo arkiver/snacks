@@ -85,7 +85,7 @@
           <% v.map{|o| q += o.quantity.to_i} %>
           <td><%= "#{k}" %></td>
             <td><%= "#{q}"%></td>
-              <td> <%= v.select{|o| !o.special_instructions.blank?}.map{|vv| "#{vv.special_instructions} in 1"}.join(', ') %> </td>
+              <td> <%= v.select{|o| !o.special_instructions.blank?}.map{|vv| "#{vv.special_instructions} in 1 order"}.join(', ') %> </td>
           </tr>
       <% end %>
     </table>
@@ -110,7 +110,7 @@
           <td><%= order.name %></td>
           <td><%= order.quantity %></td>
           <td><%= order.special_instructions %></td>
-          <td><%= link_to 'Delete', "/snacks/#{order.id}/destroy_order"%></td>
+          <td><%= link_to 'Delete', "/snacks/#{order.id}/destroy_order", confirm: "Are you sure you want to delete this order?" %></td>
         </tr>
         <% end %>
       </tbody>
