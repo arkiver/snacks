@@ -48,7 +48,7 @@
         <% @snack.name.split(',').collect(&:strip).each do |s| %>
           <div>
           <%= f.radio_button :name, s %>
-          <%= f.label s, for: "order_name_#{s}" %>
+          <%= f.label s, for: "order_name_#{s.downcase}" %>
           </div>
         <% end %>
         <span>Or Enter custom snack name not listed above:</span>
