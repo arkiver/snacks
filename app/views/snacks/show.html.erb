@@ -100,6 +100,7 @@
           <td>Food Name</td>
           <td>Qty</td>
           <td>Instructions</td>
+          <td>Actions</td>
         </tr>
       </thead>
       <tbody>
@@ -109,6 +110,7 @@
           <td><%= order.name %></td>
           <td><%= order.quantity %></td>
           <td><%= order.special_instructions %></td>
+          <td><%= link_to 'Delete', "/snacks/#{order.id}/destroy_order"%></td>
         </tr>
         <% end %>
       </tbody>

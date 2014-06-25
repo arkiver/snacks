@@ -51,6 +51,11 @@ class SnacksController < ApplicationController
     redirect_to snacks_url, notice: 'Snack was successfully destroyed.'
   end
 
+  def destroy_order
+    Order.find(params[:id]).destroy
+    redirect_to :root
+  end
+
   private
     def snack_params
       params[:snack].permit!
