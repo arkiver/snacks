@@ -110,7 +110,7 @@
           <td><%= order.name %></td>
           <td><%= order.quantity %></td>
           <td><%= order.special_instructions %></td>
-          <td><%= link_to 'Delete', "/snacks/#{order.id}/destroy_order", confirm: "Are you sure you want to delete this order?" %></td>
+          <td><%= link_to 'Delete', "/snacks/#{order.id}/destroy_order", data: { confirm: "Are you sure you want to delete this order?"} %></td>
         </tr>
         <% end %>
       </tbody>
