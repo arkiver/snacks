@@ -44,7 +44,7 @@
         <%= f.text_field :ordered_by, required: true%>
       </div>
       <div>
-        <h5>What do you want ?</h5>
+        <h5>What do you want ? *</h5>
         <% @snack.name.split(',').collect(&:strip).each do |s| %>
           <div>
           <%= f.radio_button :name, s %>
@@ -55,7 +55,7 @@
         <%= text_field_tag :custom_snack_name, nil,  placeholder: 'Enter custom snack name not listed above'%>
       </div>
       <div>
-        <h5>How many ?</h5>
+        <h5>How many ? *</h5>
         <div class="toggle"><label><%= f.radio_button :quantity, "1" %><span>1</span></label></div>
         <div class="toggle"><label><%= f.radio_button :quantity, "2" %><span>2</span></label></div>
       </div>
