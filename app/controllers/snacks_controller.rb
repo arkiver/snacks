@@ -3,7 +3,7 @@ class SnacksController < ApplicationController
   # GET /snacks/1
   def show
     @snack = Snack.where(created_at:
-                         DateTime.now.midnight..DateTime.now.advance(days: 1).midnight).first
+                         DateTime.now.midnight..DateTime.now.advance(days: 1).midnight).last
     @orders = []
     @grouped_orders = []
     @orders = @snack.orders     if @snack
