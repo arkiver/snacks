@@ -13,8 +13,10 @@
   </head>
 
   <body>
+    <%= render partial: 'header' %>
 
     <%= yield %>
+
     <script type="text/javascript">$(function(){ $(document).foundation(); });</script>
   </body>
 </html>
