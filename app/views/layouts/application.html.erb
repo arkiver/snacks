@@ -14,10 +14,14 @@
 
   <body>
     <% if Time.now.strftime("%w") === '5' %>
+      <!-- Show a beer mug background image on Fridays. -->
       <div class="friday-bg"></div>
     <% end %>
 
+    <%= render partial: 'header' %>
+
     <%= yield %>
+
     <script type="text/javascript">$(function(){ $(document).foundation(); });</script>
   </body>
 </html>
