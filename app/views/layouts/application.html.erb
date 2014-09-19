@@ -13,6 +13,9 @@
   </head>
 
   <body>
+    <% if Time.now.strftime("%w") === '5' %>
+      <div class="friday-bg"></div>
+    <% end %>
 
     <%= yield %>
     <script type="text/javascript">$(function(){ $(document).foundation(); });</script>
