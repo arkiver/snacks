@@ -16,6 +16,11 @@
     <% if Time.now.strftime("%w") === '5' %>
       <!-- Show a beer mug background image on Fridays. -->
       <div class="friday-bg"></div>
+    <% else %>
+      <% images = ['samosa.jpg', 'dabeli.JPG', 'poha.jpg', 'poha2.jpg', 'Giraffas_BrutusBurger.jpg'] %>
+      <%# images = ['http://placehold.it/1600x900', 'http://placehold.it/1366x768', 'http://placehold.it/1280x800'] %>
+      <% todays_image = images[ Random.rand( images.length )] %>
+      <div class="regular-bg" style="background-image: url('<%=image_url(todays_image)%>')"></div>
     <% end %>
 
     <%= render partial: 'header' %>
